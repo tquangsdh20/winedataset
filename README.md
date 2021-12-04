@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/tquangsdh20/winedataset/main/.github/wine_logo.svg"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/tquangsdh20/winedataset/master/.github/wine_logo.svg"></p>
 <p align="center"><img src="https://img.shields.io/badge/Group5-Le%20Thai%20%7C%20Tran%20Quang%20%7C%20Le%20Thai%20Duy%20%7C%20Le%20Nhu%20Chien%20%7C%20Phan%20Van%20Trung-blue?style=plastic"> <img src="https://img.shields.io/badge/Lecturer-Nguyen%20Hoang%20Dzung-orange?style=plastic"> <img src="https://img.shields.io/badge/version-4.0.5-blue?style=plastic&logo=R"></p>
 
 ## 1. Thu thập dữ liệu (Data Collection)
@@ -19,11 +19,11 @@ Dữ liệu trong hai tập trên gồm 12 biến như sau:
 - **citric.acid**: nồng độ Axit Citric
 - **residual.sugar**: lượng đường
 - **chlorides**: nồng độ Clo
-- **free.sulfur.dioxide**: các thành phần $SO_2$ tự do
-- **total.sulfur.dioxide**: tổng số gốc $SO_2$
+- **free.sulfur.dioxide**: các thành phần SO2 tự do
+- **total.sulfur.dioxide**: tổng số gốc SO2
 - **density**: mức độ đậm đặc của rượu
 - **pH**: nồng độ pH
-- **sulphates**: các gốc $SO_4$
+- **sulphates**: các gốc SO4
 - **alcohol**: nồng độ cồn
 - **quality**: kết quả chất lượng được đánh giá theo thang điểm từ 1-10
 
@@ -134,7 +134,7 @@ chart.Correlation(wine_dat[,1:12],histogram=TRUE,pch="+")
 
 <p>Biểu đồ trên cho thấy một số biến có ảnh hưởng đến nhau như sau:
 
-<div align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Độ chua cố định của rượu <i>(fixed.acidity)</i> bị ảnh hưởng bởi các yếu tố mức độ bay hơi <i>(volatile.acidity)</i>, nồng độ Clo <i>(chlorides)</i>, nồng độ các gốc SO$_4$ <i>(sulphates)</i>, nồng độ axit citric trong rượu <i>(citric.acid)</i> và mức độ đậm đặc của rượu <i>(density)</i> với mức độ ảnh hưởng tăng dần theo tương quan thuận. Trong đó, hai thông số có ảnh hưởng lớn nhất đến độ chua là mức độ đậm đặc của rượu và nồng độ axit citric trong rượu với hệ số tương quan lần lượt là <i>0.56 và 0.41</i>, theo kết quả cho thấy sự khác biệt về độ chua của rượu trong dữ liệu có thể giải thích được <i>16.81%</i> dựa trên sự khác biệt về nồng độ axit citrid của các loại rượu và <i>31.36%</i> dựa trên sự khác biệt về nồng độ. Ngoài ra, độ chua cố định có tương quan nghịch với ... </div>
+<div align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Độ chua cố định của rượu <i>(fixed.acidity)</i> bị ảnh hưởng bởi các yếu tố mức độ bay hơi <i>(volatile.acidity)</i>, nồng độ Clo <i>(chlorides)</i>, nồng độ các gốc SO4 <i>(sulphates)</i>, nồng độ axit citric trong rượu <i>(citric.acid)</i> và mức độ đậm đặc của rượu <i>(density)</i> với mức độ ảnh hưởng tăng dần theo tương quan thuận. Trong đó, hai thông số có ảnh hưởng lớn nhất đến độ chua là mức độ đậm đặc của rượu và nồng độ axit citric trong rượu với hệ số tương quan lần lượt là <i>0.56 và 0.41</i>, theo kết quả cho thấy sự khác biệt về độ chua của rượu trong dữ liệu có thể giải thích được <i>16.81%</i> dựa trên sự khác biệt về nồng độ axit citrid của các loại rượu và <i>31.36%</i> dựa trên sự khác biệt về nồng độ. Ngoài ra, độ chua cố định có tương quan nghịch với ... </div>
 <div align="justify"></div>
 
 <div align="justify">Tương tự với mức độ bay hơi, độ đậm đặc của rượu và chất lượng quality</div>
@@ -306,15 +306,6 @@ res.pca$quali.sup
 	<tr><th scope=row>white</th><td>-50.19962</td><td>-1.821258</td><td>-4.584977</td><td> 0.2213375</td><td>-5.212995</td></tr>
 </tbody>
 </table>
-</dd>
-	<dt>$dist</dt>
-		<dd><style>
-.dl-inline {width: auto; margin:0; padding: 0}
-.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
-.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
-.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>red</dt><dd>1.63368204892727</dd><dt>white</dt><dd>1.63368204892757</dd></dl>
-</dd>
 	<dt>$eta2</dt>
 		<dd><table class="dataframe">
 <caption>A matrix: 1 × 5 of type dbl</caption>
@@ -350,7 +341,7 @@ Khi biểu diễn dữ liệu theo biến giải thích về phân loại, ta th
 
 ### 4.1. Xây dựng mô hình máy học
 
-<p align="center"><img src="https://raw.githubusercontent.com/tquangsdh20/winedataset/main/.github/model.svg"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/tquangsdh20/winedataset/master/.github/model.svg"></p>
 
 Tiến hành extract dữ liệu để xây dựng model
 
@@ -390,23 +381,10 @@ set.seed(1)
 dat_smpl = sample.split(mydat$type,SplitRat=0.8)
 train_dat = data.frame(subset(mydat,dat_smpl == T))
 test_dat = data.frame(subset(mydat,dat_smpl == F))
-# train_dat[train_dat$type == 2,'type'] <- 'white'
-# train_dat[train_dat$type == 1,'type'] <- 'red'
-# test_dat[test_dat$type == 2,'type'] <- 'white'
-# test_dat[test_dat$type == 1,'type'] <- 'red'
 train_dat$type <- as.factor(train_dat$type)
 test_dat$type <- as.factor(test_dat$type)
 summary(train_dat$type)
 ```
-
-
-<style>
-.dl-inline {width: auto; margin:0; padding: 0}
-.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
-.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
-.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>red</dt><dd>1279</dd><dt>white</dt><dd>1279</dd></dl>
-
 
 
 Xây dựng CART Model
@@ -436,29 +414,9 @@ predicted = predict(CART_model, test_dat, type = 'class')
 summary(predicted)
 ```
 
-    [1] "The test data"
+    [1] "The test data - red : 320 - white : 320"
+    [2] "Prediction - red : 319 - white : 321"
     
-
-
-<style>
-.dl-inline {width: auto; margin:0; padding: 0}
-.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
-.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
-.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>red</dt><dd>320</dd><dt>white</dt><dd>320</dd></dl>
-
-
-
-    [1] "Prediction"
-    
-
-
-<style>
-.dl-inline {width: auto; margin:0; padding: 0}
-.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
-.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
-.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>red</dt><dd>319</dd><dt>white</dt><dd>321</dd></dl>
 
 
 
