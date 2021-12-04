@@ -1,5 +1,5 @@
 <p align="center"><img src="https://raw.githubusercontent.com/tquangsdh20/winedataset/master/.github/wine_logo.svg"></p>
-<p align="center"><img src="https://img.shields.io/badge/Group5-Le%20Thai%20%7C%20Tran%20Quang%20%7C%20Le%20Thai%20Duy%20%7C%20Le%20Nhu%20Chien%20%7C%20Phan%20Van%20Trung-blue?style=plastic"> <img src="https://img.shields.io/badge/Lecturer-Nguyen%20Hoang%20Dzung-orange?style=plastic"> <img src="https://img.shields.io/badge/version-4.0.5-blue?style=plastic&logo=R"></p>
+<p align="center"><img src="https://img.shields.io/badge/Group5-Le%20Thai%20%7C%20Tran%20Quang%20%7C%20Le%20Thai%20Duy%20%7C%20Le%20Nhu%20Chien-blue?style=plastic"> <img src="https://img.shields.io/badge/Lecturer-Nguyen%20Hoang%20Dzung-orange?style=plastic"> <img src="https://img.shields.io/badge/version-4.0.5-blue?style=plastic&logo=R"></p>
 
 ## 1. Thu thập dữ liệu (Data Collection)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dữ liệu gồm có hai tập *datasets* về các mẫu rượu vang đỏ và trắng thu thập ở phía bắc của Bồ Đào Nha nhằm mô hình hóa chất lượng của rượu vang dựa trên các kiểm nghiệm hóa lý. Tập dữ liệu nghiêm cứu được lấy từ [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php) có thể tải về [tại đây](https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/).
