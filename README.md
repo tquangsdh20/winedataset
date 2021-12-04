@@ -134,10 +134,20 @@ chart.Correlation(wine_dat[,1:12],histogram=TRUE,pch="+")
 
 <p>Biểu đồ trên cho thấy một số biến có ảnh hưởng đến nhau như sau:
 
-<div align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Độ chua cố định của rượu <i>(fixed.acidity)</i> bị ảnh hưởng bởi các yếu tố mức độ bay hơi <i>(volatile.acidity)</i>, nồng độ Clo <i>(chlorides)</i>, nồng độ các gốc SO4 <i>(sulphates)</i>, nồng độ axit citric trong rượu <i>(citric.acid)</i> và mức độ đậm đặc của rượu <i>(density)</i> với mức độ ảnh hưởng tăng dần theo tương quan thuận. Trong đó, hai thông số có ảnh hưởng lớn nhất đến độ chua là mức độ đậm đặc của rượu và nồng độ axit citric trong rượu với hệ số tương quan lần lượt là <i>0.56 và 0.41</i>, theo kết quả cho thấy sự khác biệt về độ chua của rượu trong dữ liệu có thể giải thích được <i>16.81%</i> dựa trên sự khác biệt về nồng độ axit citrid của các loại rượu và <i>31.36%</i> dựa trên sự khác biệt về nồng độ. Ngoài ra, độ chua cố định có tương quan nghịch với ... </div>
+<div align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Độ chua cố định của rượu <i>(fixed.acidity)</i> bị ảnh hưởng bởi các yếu tố mức độ bay hơi <i>(volatile.acidity)</i>, nồng độ Clo <i>(chlorides)</i>, nồng độ các gốc SO4 <i>(sulphates)</i>, nồng độ axit citric trong rượu <i>(citric.acid)</i> và mức độ đậm đặc của rượu <i>(density)</i> với mức độ ảnh hưởng tăng dần theo tương quan thuận. Trong đó, hai thông số có ảnh hưởng lớn nhất đến độ chua là mức độ đậm đặc của rượu và nồng độ axit citric trong rượu với hệ số tương quan lần lượt là <i>0.56 và 0.41</i>, theo kết quả cho thấy sự khác biệt về độ chua của rượu trong dữ liệu có thể giải thích được <i>16.81%</i> dựa trên sự khác biệt về nồng độ axit citrid của các loại rượu và <i>31.36%</i> dựa trên sự khác biệt về nồng độ. Ngoài ra, độ chua cố định có tương quan nghịch với nồng độ SO2 tự do <i>(free sulfur dioxide)</i>, nồng độ tổng số gốc SO2 <i>(total sulfur dioxide)</i>, độ PH <i>(PH)</i>, với hệ số tương quan nằm trong khoảng <i>[-0.39,-0.31]</i> </div>
 <div align="justify"></div>
-
-<div align="justify">Tương tự với mức độ bay hơi, độ đậm đặc của rượu và chất lượng quality</div>
+</p>
+<p>
+<div align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Độ bay hơi của rượu <i>(volatile.acidity)</i> bị ảnh hưởng bởi nồng độ Clo <i>(chlorides)</i>, độ đậm đặc <i>(density)</i> và độ PH của rượu với mức độ ảnh hưởng tăng dần theo tương quan thuận. Trong đó, hệ số tương quan giữa độ bay hơi của rượu với các yếu tố trên gần tương tự nhau, trong khoảng <i>[0.31,0.36]</i>. Ngược lại, độ bay hơi của rượu có tương quan nghịch với nồng độ axit citric <i>(citric.acid)</i> nồng độ SO2 tự do <i>(free sulfur dioxide)</i>, nồng độ tổng số gốc SO2 <i>(total sulfur dioxide)</i>, với hệ số tương quan nằm trong khoảng <i>[-0.47,-0.4]</i>  </div>
+</p>
+<p>
+<div align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Độ đậm đặc của rượu <i>(density)<i/> có tương quan thuận với nồng độ gốc SO4 <i>(sulphates)</i>, lượng đường <i>residual sugar</i> và nồng độ Clo <i>(chlorides)</i>, với hệ số tương quan trong khoảng <i>[0.33,0.38]</i>. Ngược lại, độ đậm đặc của rượu tương quan nghịch với nồng độ cồn <i>(alcohol)</i> với hệ số tương quan -0.6.</div>
+</p>
+<p>
+<div align="justify">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chất lượng rượu <i>(quality)</i> có tương quan thuận với nồng độ cồn và nồng độ Axit Citric <i>(citric.acid)</i> với hệ số tương quan lần lượt là 0.45 và 0.15. Ngược lại, chất lượng rượu có tuongq quan nghịch với độ đậm đặc <i>(density)</i> và độ bay hơi của rượu <i>(volatile.acidity)</i> với hệ số tương quan lần lượt là -0.39 và -0.32.</div>
+</p>
+<p>
+<div align="justify">Đó là tất cả những tương quan ta có thể thấy được, tuy nhiên ngoài ra dữ liệu còn có thể có những tương quan tiềm ẩn mà ta chưa thể khám phá ra được. Để khai thác các yếu tố tiềm ẩn giữa chất lượng của rượu cũng như là cách thức phân loại rượu dựa trên các yếu tố hóa lý.</div>
 </p> 
 
 ### 3.3. Phân tích thành phần chính (PCA)
