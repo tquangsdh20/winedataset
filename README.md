@@ -35,6 +35,7 @@ Dữ liệu trong hai tập trên gồm 12 biến như sau:
 require(dplyr)
 require(ggplot2)
 require(rpart)
+require(caTools)
 require(caret)
 require(rpart.plot)
 require(FactoMineR)
@@ -58,7 +59,6 @@ wine_dat <- rbind(
     ,data.frame(red_wine,type='red')
 )
 wine_dat$type <- as.factor(wine_dat$type)
-# wine_dat$quality <- as.factor(wine_dat$quality)
 head(wine_dat)
 ```
 
@@ -198,7 +198,7 @@ names.arg=paste("dim",1:nrow(res.pca$eig)))
     
 
 
-Kết quả cho thấy hai chiều không gian chính Dim1 và Dim2 có thể giải thích được 51.83% các giao động của dữ liệu chưa bao gồm các biến giải thích *quality* và *type*, tỉ lệ giải thích là tương đối thấp tuy nhiên nó có thể diễn giải được cấu trúc cần thiết của dữ liệu, vì phân tích PCA trên gồm có 11 biến dữ liệu và lượng mẫu tương đối rất lớn gần 3200 mẫu thì tỉ lệ giải thích được cần thiết là trên 28.9%. Tuy nhiên sự biến đổi của các yếu tố lý hóa tác động đến chất lượng của rượu không thể chỉ giải thích được dữa trên hai chiều chính.
+Kết quả cho thấy hai chiều không gian chính Dim1 và Dim2 có thể giải thích được 51.83% các giao động của dữ liệu chưa bao gồm các biến giải thích *quality* và *type*, tỉ lệ giải thích là tương đối thấp tuy nhiên nó có thể diễn giải được cấu trúc cần thiết của dữ liệu, vì phân tích PCA trên gồm có 11 biến dữ liệu và lượng mẫu tương đối rất lớn gần 3200 mẫu thì tỉ lệ giải thích được cần thiết là trên 28.9% (Dựa trên kết quả so sánh với khoảng tin cậy 95% của kết quả chạy 10000 các phân tích PCAs). Tuy nhiên sự biến đổi của các yếu tố lý hóa tác động đến chất lượng của rượu không thể chỉ giải thích được dữa trên hai chiều không gian chính.
 
 
 ```R
@@ -209,34 +209,34 @@ res.pca$quanti.sup
 <dl>
 	<dt>$coord</dt>
 		<dd><table class="dataframe">
-<caption>A matrix: 1 × 5 of type dbl</caption>
+<caption>A matrix: 1 × 11 of type dbl</caption>
 <thead>
-	<tr><th></th><th scope=col>Dim.1</th><th scope=col>Dim.2</th><th scope=col>Dim.3</th><th scope=col>Dim.4</th><th scope=col>Dim.5</th></tr>
+	<tr><th></th><th scope=col>Dim.1</th><th scope=col>Dim.2</th><th scope=col>Dim.3</th><th scope=col>Dim.4</th><th scope=col>Dim.5</th><th scope=col>Dim.6</th><th scope=col>Dim.7</th><th scope=col>Dim.8</th><th scope=col>Dim.9</th><th scope=col>Dim.10</th><th scope=col>Dim.11</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>quality</th><td>-0.1588748</td><td>-0.1659027</td><td>-0.3776203</td><td>0.1430706</td><td>0.2174304</td></tr>
+	<tr><th scope=row>quality</th><td>-0.1588748</td><td>-0.1659027</td><td>-0.3776203</td><td>0.1430706</td><td>0.2174304</td><td>0.1290708</td><td>-0.05572945</td><td>-0.07379236</td><td>-0.1589965</td><td>-0.008851132</td><td>0.03467706</td></tr>
 </tbody>
 </table>
 </dd>
 	<dt>$cor</dt>
 		<dd><table class="dataframe">
-<caption>A matrix: 1 × 5 of type dbl</caption>
+<caption>A matrix: 1 × 11 of type dbl</caption>
 <thead>
-	<tr><th></th><th scope=col>Dim.1</th><th scope=col>Dim.2</th><th scope=col>Dim.3</th><th scope=col>Dim.4</th><th scope=col>Dim.5</th></tr>
+	<tr><th></th><th scope=col>Dim.1</th><th scope=col>Dim.2</th><th scope=col>Dim.3</th><th scope=col>Dim.4</th><th scope=col>Dim.5</th><th scope=col>Dim.6</th><th scope=col>Dim.7</th><th scope=col>Dim.8</th><th scope=col>Dim.9</th><th scope=col>Dim.10</th><th scope=col>Dim.11</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>quality</th><td>-0.1588748</td><td>-0.1659027</td><td>-0.3776203</td><td>0.1430706</td><td>0.2174304</td></tr>
+	<tr><th scope=row>quality</th><td>-0.1588748</td><td>-0.1659027</td><td>-0.3776203</td><td>0.1430706</td><td>0.2174304</td><td>0.1290708</td><td>-0.05572945</td><td>-0.07379236</td><td>-0.1589965</td><td>-0.008851132</td><td>0.03467706</td></tr>
 </tbody>
 </table>
 </dd>
 	<dt>$cos2</dt>
 		<dd><table class="dataframe">
-<caption>A matrix: 1 × 5 of type dbl</caption>
+<caption>A matrix: 1 × 11 of type dbl</caption>
 <thead>
-	<tr><th></th><th scope=col>Dim.1</th><th scope=col>Dim.2</th><th scope=col>Dim.3</th><th scope=col>Dim.4</th><th scope=col>Dim.5</th></tr>
+	<tr><th></th><th scope=col>Dim.1</th><th scope=col>Dim.2</th><th scope=col>Dim.3</th><th scope=col>Dim.4</th><th scope=col>Dim.5</th><th scope=col>Dim.6</th><th scope=col>Dim.7</th><th scope=col>Dim.8</th><th scope=col>Dim.9</th><th scope=col>Dim.10</th><th scope=col>Dim.11</th></tr>
 </thead>
 <tbody>
-	<tr><th scope=row>quality</th><td>0.0252412</td><td>0.0275237</td><td>0.1425971</td><td>0.02046921</td><td>0.047276</td></tr>
+	<tr><th scope=row>quality</th><td>0.0252412</td><td>0.0275237</td><td>0.1425971</td><td>0.02046921</td><td>0.047276</td><td>0.01665927</td><td>0.003105771</td><td>0.005445313</td><td>0.02527988</td><td>7.834254e-05</td><td>0.001202498</td></tr>
 </tbody>
 </table>
 </dd>
@@ -244,9 +244,9 @@ res.pca$quanti.sup
 
 
 
-Qua kết quả đánh giá biến giải thích đối với các chiều không gian cho thấy rằng chất lượng của rượu nó đóng góp tốt nhất ở chiều không gian thứ 3 và thứ 5. Nên ta sẽ chọn chiều không gian này để biểu diễn theo biến chất lượng của rượu để phân tích.
+<p><div align="justify">Qua kết quả đánh giá biến giải thích đối với các chiều không gian cho thấy rằng chất lượng của rượu nó đóng góp tốt nhất ở chiều không gian thứ 3. Tiếp đến là chiều không gian Dim5, Dim2, Dim9, Dim1... Nên ta sẽ chọn chiều không gian Dim1 và Dim3 này để biểu diễn theo biến chất lượng của rượu để phân tích vì nó tốt nhất và mức độ ý nghĩa giải thích các giao động của dữ liệu là cao nhất.</div></p>
 
-#### Biểu diễn chiều Dim3 và Dim5 để xem xét chất lượng của rượu
+#### Biểu diễn chiều Dim1 và Dim3 để xem xét chất lượng của rượu
 
 
 ```R
@@ -257,22 +257,27 @@ plot(res.pca,choix="var",axes=c(3,5))
 
 
     
-![png](./.github/output_23_0.png?sanitize=true)
+![png](./.github/output_25_0.png?sanitize=true)
     
 
 
 
     
-![png](./.github/output_23_1.png?sanitize=true)
+![png](./.github/output_25_1.png?sanitize=true)
     
 
 
+<p><div align="justify">
 Nhận xét về các cá thể ta thấy rằng cấu trúc đám mây dữ liệu trong hai chiều này phân chia ra thành cụm chính rõ ràng theo 4 góc phần tư, như hình bốn cánh hoa, ngoài ra ta thấy rằng các điểm dữ liệu vùng biên, hay vùng ngoại lai đa phần là các điểm dữ liệu màu xanh dương hoặc xanh tím, là mức chất lượng thấp nhất trong tập dữ liệu khoảng 3 ~ 4 điểm. Mức độ chất lượng của sản phẩm rượu cũng tăng dần vào tâm của mỗi cánh hoa vì càng vào tâm các cánh hoa ta thấy rằng màu sắc nó chuyển từ tím sáng đỏ và đậm dần, điều này chứng tỏ mức độ điểm chất lượng tăng dần.  
-
-Ngoài ra, ta có thể thấy được rằng chất lượng rượu nó tương quan rất tốt đối với các yếu tố, nồng độ cồn, độ chua cố định, thành phần axit citric, các gốc sulphat, điều này cho thấy chất lượng của rượu có thể tăng thêm nếu các yếu tố này tốt. Tuy nhiên, cũng có những yếu tố khác ảnh hưởng tiêu cực đến chất lượng của rượu như là mức độ bay hơi của rượu, nồng độ clo, độ đậm đặc của rượu.
-
-
-Tuy nhiên, mức độ ý nghĩa của cả hai chiều này chỉ chiểm khoảng 21.63%, tỉ lệ khá thấp. Hay nói cách khác nếu chỉ dựa vào các phân tích thành phần hóa lý thì chưa đủ thông tin để kết luận được loại rượu vang đó có tốt hay không.
+</div></p>
+<p><div align="justify">
+Ngoài ra, ta có thể thấy được rằng chất lượng rượu nó tương quan rất tốt đối với các yếu tố, nồng độ cồn, thành phần axit citric, các gốc sulphat, điều này cho thấy chất lượng của rượu có thể tăng thêm nếu các yếu tố này tốt. Tuy nhiên, cũng có những yếu tố khác ảnh hưởng tiêu cực đến chất lượng của rượu như là mức độ bay hơi của rượu, nồng độ clo, độ đậm đặc của rượu. Ngoài ra, theo như ta thấy thì yếu tố chất lượng của rượu gần như trực giao với các yếu tố nồng độ $SO_4$ và lượng đường dư trong rượu, tức là các yếu tố này không ảnh hưởng đến chất lượng của rượu.
+</div></p>
+<p><div align="justify">
+Tuy nhiên, mức độ ý nghĩa của cả hai chiều này chỉ chiểm khoảng 45.33%, tỉ lệ tương đối thấp. Tuy nhiên vẫn diễn tả được mức cần thiết của cấu trúc dữ liệu. Hay nói cách khác nếu chỉ dựa vào các phân tích thành phần chính trong hai chiều không gian đầu tiên thì không đủ để giải thích được ý nghĩa của các giao động về chất lượng rượu vì đóng góp của quality trên các chiều không gian chính là không nhiều như đã đề cập trước đó. Để giải thích được tốt nhất chất lượng của sản phẩm rượu, cần phải phối hợp thêm các chiều không gian khác để giải thích trong trường hợp này ta sẽ chọn các chiều không gian Dim1, Dim2, Dim3, Dim4, Dim5, Dim6 và Dim9 để giảm bớt các chiều không gian để tiến hành ứng dụng các model máy học phân tích và dự đoán chất lượng của rượu vang, khi đó khả năng giải thích cho các giao động dữ liệu trong trường hợp này tổng cộng là 89.52%.</div></p>
+<p>
+<div align="justify"></div>    
+</p>
 
 
 ```R
@@ -341,23 +346,137 @@ plot(res.pca,choix="ind",habillage=13,cex=0.7)
 
 
     
-![png](./.github/output_27_0.png?sanitize=true)
+![png](./.github/output_29_0.png?sanitize=true)
     
 
 
-Khi biểu diễn dữ liệu theo biến giải thích về phân loại, ta thấy được rõ ràng dữ liệu tách hẳn ra thành 2 cụm dữ liệu riêng biệt là rượu vang đỏ và rượu vang trắng. Như vậy, ta có thể dự đoán rằng theo cách nhìn của hai chiều không gian chính thì rượu vang đỏ và rượu vang trắng sẽ có một vài thành phần hóa lý sẽ hoàn toàn khác biệt với nhau. Hay nói cách khác ta có thể hoàn toàn dựa vào thành phần hóa lý của rượu để dự đoán được loại rượu là vang đỏ hay vang trắng.
+Khi biểu diễn dữ liệu theo biến giải thích về phân loại, ta thấy được rõ ràng dữ liệu tách hẳn ra thành 2 cụm dữ liệu riêng biệt trong chiều không gian chính thứ nhất. Hay nói cách khác chiều không gian chính thứ nhất là chiều không gian để phân chia loại rượu.
 
-## 4. Dự đoán loại rượu dựa trên thành phần chính sau khi phân tích PCA
+## 4. Xây dựng hai model máy học dự đoán chất lượng rượu và dự đoán loại rượu
 
-### 4.1. Xây dựng mô hình máy học
+Ở phần này nhóm thực hiện sẽ ứng dụng kiến thức chuyên môn để xây dựng hai mô hình máy học theo quy trình bên dưới:
+- Mô hình dự đoán chất lượng của rượu dựa trên các thành phần chính đã phân tích trước đó
+- Mô hình dự đoán chất lượng của rượu dựa trên 2 các thành phần chính 
 
-<p align="center"><img src="https://raw.githubusercontent.com/tquangsdh20/winedataset/master/.github/model.svg"></p>
+<center><img src="https://raw.githubusercontent.com/tquangsdh20/winedataset/master/.github/model.svg"></center>
 
-Tiến hành extract dữ liệu để xây dựng model
+### 4.1. Xây dựng mô hình máy học dự đoán chất lượng của loại rượu
+
+Phần này ta sẽ phân nhóm các chất lượng loại rượu làm 3 nhóm chính sau đây:
+- **low** : Những nhóm chất lượng rượu từ 1 ~ 4
+- **medium** : Nhóm những loại rượu chất lượng từ 5 ~ 6
+- **high** : Nhóm những loại rượu chất lượng từ 7 ~ 9  
 
 
 ```R
-mydat = data.frame(cbind(res.pca$ind$coord,type=wine_dat$type))
+quality_dat = data.frame(cbind(res.pca$ind$coord[,c(1:6,9)],quality=wine_dat$quality))
+quality_dat[quality_dat$quality < 5.0,'quality'] <- 'low'
+quality_dat[quality_dat$quality < 7.0,'quality'] <-  'medium'
+quality_dat[(quality_dat$quality != 'low')&(quality_dat$quality != 'medium'),'quality'] <- 'high'
+quality_dat$quality <- as.factor(quality_dat$quality)
+head(quality_dat)
+set.seed(1)
+dat_smpl = sample.split(quality_dat$quality,SplitRat=0.8)
+train_dat = data.frame(subset(quality_dat,dat_smpl == T))
+test_dat = data.frame(subset(quality_dat,dat_smpl == F))
+summary(train_dat$quality)
+```
+
+
+<table class="dataframe">
+<caption>A data.frame: 6 × 8</caption>
+<thead>
+	<tr><th></th><th scope=col>Dim.1</th><th scope=col>Dim.2</th><th scope=col>Dim.3</th><th scope=col>Dim.4</th><th scope=col>Dim.5</th><th scope=col>Dim.6</th><th scope=col>Dim.9</th><th scope=col>quality</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;fct&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>-1.1583155</td><td> 2.50205297</td><td> 0.2217197</td><td> 1.26054836</td><td> 0.03139377</td><td> 0.7256396</td><td> 0.83457751</td><td>medium</td></tr>
+	<tr><th scope=row>2</th><td>-0.8394453</td><td>-1.23367395</td><td>-1.4868028</td><td>-0.59027497</td><td>-0.70410815</td><td>-0.4750232</td><td> 0.63519386</td><td>low   </td></tr>
+	<tr><th scope=row>3</th><td>-0.8165065</td><td>-0.02031042</td><td> 1.2824748</td><td>-1.41618571</td><td>-0.03556543</td><td>-0.6553109</td><td> 0.03552704</td><td>medium</td></tr>
+	<tr><th scope=row>4</th><td>-3.3597111</td><td> 0.70299773</td><td>-0.5510811</td><td> 0.01412896</td><td>-0.26905030</td><td> 0.4585865</td><td>-0.25063590</td><td>high  </td></tr>
+	<tr><th scope=row>5</th><td>-2.1528084</td><td> 0.60018393</td><td>-0.5024772</td><td>-0.64938786</td><td> 0.48874428</td><td> 2.0472824</td><td>-0.35180532</td><td>medium</td></tr>
+	<tr><th scope=row>6</th><td>-2.8004525</td><td> 2.84244601</td><td> 0.3240747</td><td>-0.16091926</td><td> 0.27056494</td><td>-0.3612317</td><td> 0.44328676</td><td>low   </td></tr>
+</tbody>
+</table>
+
+Khi đó, ta thấy kết quả bảng dữ liệu mới biểu diễn như ở trên. Tuy nhiên, phân bố giữa các nhóm là không được đồng đều do đó ta cần phải lấy mẫu gia tăng để giải quyết việc mất cân bằng của tập dữ liệu. Sau đó, tiến hành phân tích xây dựng model máy học theo mô hình cây học quyết định *(Decision Tree)*.
+
+```R
+subdat0 = subset(quality_dat,quality_dat$quality=='low')
+subdat0 = rbind(subdat0,subdat0,subdat0)
+subdat1 = subset(quality_dat,quality_dat$quality=='high')
+train_dat = rbind(train_dat,subdat0,subdat0,subdat0,subdat1)
+summary(train_dat$quality)
+```
+
+```
+high : 1001
+low : 1245
+medium : 2012
+```
+
+```R
+CART_model = rpart(quality ~ ., train_dat)
+options(repr.plot.width = 12, rep.plot.height = 7, repr.plot.res = 200, err=-1)
+rpart.plot(CART_model, extra = 0, type=5, tweak=1.2, legend.x=NULL, legend.y= NULL)
+```
+
+![png](./.github/output_35_1.png?sanitize=true)
+
+#### Đánh giá mô hình
+
+```R
+predicted = predict(CART_model, test_dat, type = 'class')
+confusionMatrix(predicted,test_dat$quality)
+```
+
+
+    Confusion Matrix and Statistics
+    
+              Reference
+    Prediction high low medium
+        high     60   1    108
+        low       5  10     60
+        medium   46  14    335
+    
+    Overall Statistics
+                                              
+                   Accuracy : 0.6338          
+                     95% CI : (0.5951, 0.6712)
+        No Information Rate : 0.7872          
+        P-Value [Acc > NIR] : 1               
+                                              
+                      Kappa : 0.2089          
+                                              
+     Mcnemar's Test P-Value : 3.766e-12       
+    
+    Statistics by Class:
+    
+                         Class: high Class: low Class: medium
+    Sensitivity               0.5405    0.40000        0.6660
+    Specificity               0.7936    0.89414        0.5588
+    Pos Pred Value            0.3550    0.13333        0.8481
+    Neg Pred Value            0.8915    0.97340        0.3115
+    Prevalence                0.1737    0.03912        0.7872
+    Detection Rate            0.0939    0.01565        0.5243
+    Detection Prevalence      0.2645    0.11737        0.6182
+    Balanced Accuracy         0.6671    0.64707        0.6124
+
+#### Nhận xét mô hình đánh giá chất lượng rượu
+Theo như kết quả dự đoán thì ta thấy rằng model máy học trên dự đoán đúng 405/639 tổng số các trường hợp. Điểm số của mô hình máy học này là 63.38%. Trong đó, các trường hợp dự đoán sai như sau:
+- Tổng 111 trường hợp thuộc nhóm chất lượng cao, dự đoán đúng 60 trường hợp, 5 trường hợp dự đoán là chất lượng thấp và 46 trường hợp dự đoán là chết lượng trung bình.
+- Tổng 503 trường hợp thuộc nhóm chất lượng trung bình, dự đoán đúng 335 trường hợp, có 108 trường hợp dự đoán nhầm lẫn sang nhóm chất lượng cao và 60 trường hợp nhầm sang nhóm chất lượng thấp.
+- Tổng 25 trường hợp thuộc nhóm chất lượng thấp, dự đoán đúng 10 trường hợp, 14 trường hợp nhầm lẫn sang nhóm chất lượng trung bình và 1 trường hợp nhầm lẫn sang chất lượng cao.
+
+Từ đó ta thấy rằng có 6/639 tổng số trường hợp dự đoán sai nghiêm trọng (nhỏ hơn 1%), tức là chất lượng thấp nhưng lại đoán là chất lượng cao, chất lượng cao nhưng lại dự đoán là chất lượng thấp.
+
+### 4.2. Xây dựng mô hình máy học dự đoán loại rượu
+
+Tương tự như trên ta tiến hành xây dựng mô hình dự đoán loại rượu vang
+
+
+```R
+mydat = data.frame(cbind(res.pca$ind$coord[,1:5],type=wine_dat$type))
 mydat[mydat$type == 2,'type'] <- 'white'
 mydat[mydat$type == 1,'type'] <- 'red'
 mydat$type <- as.factor(mydat$type)
@@ -385,7 +504,6 @@ head(mydat)
 
 Tách biệt hai tập dữ liệu để training và testing cho model máy học
 
-
 ```R
 set.seed(1)
 dat_smpl = sample.split(mydat$type,SplitRat=0.8)
@@ -408,32 +526,15 @@ rpart.plot(CART_model, extra = 0, type=5, tweak=1.2)
 
 
     
-![png](./.github/output_34_0.png?sanitize=true)
+![png](./.github/output_45_0.png?sanitize=true)
     
 
 
-## 4.2. Đánh giá model
+#### Đánh giá chất lượng mô hình
 
 
 ```R
-# Predict fraud classe with SMOTE sampling
-print("The test data")
-summary(test_dat$type)
-print("Prediction")
 predicted = predict(CART_model, test_dat, type = 'class')
-summary(predicted)
-```
-
-    [1] "The test data - red : 320 - white : 320"
-    [2] "Prediction - red : 319 - white : 321"
-    
-
-
-
-Từ trên cho thấy kết quả thực tế của tập dữ liệu testing thì có 320 trường hợp là rượu vang đỏ và 320 trường hợp là rượu vang trắng. Sau đó sẽ đem đi tiến hành dự đoán kết quả.
-
-
-```R
 confusionMatrix(predicted,test_dat$type)
 ```
 
@@ -467,12 +568,12 @@ confusionMatrix(predicted,test_dat$type)
                                               
 
 
-Theo như kết quả dự đoán thì ta thấy rằng model máy học trên dự đoán đúng 314/320 trường hợp rượu vang đỏ dựa trên thành phần lý hóa và dự đoán đúng được 315/320 trường hợp rượu vang trắng. Tỷ lệ chính xác của model theo kết quả trên là 98.28%.
+Từ trên cho thấy kết quả thực tế của tập dữ liệu testing thì có 320 trường hợp là rượu vang đỏ và 320 trường hợp là rượu vang trắng. Sau đó sẽ đem đi tiến hành dự đoán kết quả. Theo như kết quả dự đoán thì ta thấy rằng model máy học trên dự đoán đúng 314/320 trường hợp rượu vang đỏ dựa trên thành phần lý hóa và dự đoán đúng được 315/320 trường hợp rượu vang trắng. Tỷ lệ chính xác của model theo kết quả trên là 98.28%.
 
 ## 5. Kết luận
 
 Như vậy qua kết quả phân tích và đánh giá ta có thể rút ra được những kết luận sau đây:
 
-- Không thể đánh giá chất lượng của rượu vang chỉ dựa trên các thành phần hóa lý. Trên thực tế nguyên liệu, các thành phần hóa lý của rượu chỉ đóng góp một phần trong việc làm tăng hương vị của rượu, ngoài ra điểm quan trong nữa để khiến rượu ngon có thể là do phương pháp ủ rượu và môi trường ủ rượu... hay các yếu tố mà không thể thống kê được
+- Các thành phần hóa lý theo thống kê ta nhận thấy chỉ có thể giải thích hay dự đoán được một phần chất lượng của loại rượu, cụ thể theo như phân tích trong bài này tỉ lệ dự đoán chính xác chỉ khoảng 63.38% và kết quả này chỉ giải thích được 89.52% các giao động của dữ liệu. Trên thực tế nguyên liệu, các thành phần hóa lý của rượu chỉ đóng góp một phần trong việc làm tăng hương vị của rượu, ngoài ra yếu tố quan trọng khác nữa để khiến rượu ngon có thể là do phương pháp ủ rượu và môi trường ủ rượu.
 
-- Đối với việc phân loại rượu vang thì ngược lại, dựa vào kết quả phân tích chính của các yếu tố hóa lý của nó ta hoàn toàn có thể phân loại nó bằng cách ứng dụng các model máy học, để xây dựng một ứng dụng dự đoán loại rượu dựa trên các thành phần lý hóa của nó.
+- Đối với việc phân loại rượu vang thì hoàn toàn có thể giải thích hay dự đoán được loại rượu dự trên các thông số hóa lý của rượu theo như kết quả phân tích thành phần chính thì thành phần đầu tiên là thành phần giải thích gần như hoàn toàn cho việc phân loại rượu.
